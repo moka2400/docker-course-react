@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web: # App name
+    build:
+      context: . # The context should be the root directory where docker-compose is located, i.e. the place in which we have all the things it should copy from when building image
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app # Dot indicates current workdir. : means current folder OUTSIDE the container, usr/app is the targeted folder inside the container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: # Note - all this Volumes crap is only necessary for docker-compose, when we want to compose stuff locally and see development changes immediately etc. But in a production environment, the code does not change, and so the COPY ./ ./ in Dockerfile is sufficient to just be copied once.
+      - /usr/app/node_modules
+      - .:/usr/app
+    command: ["npm", "run", "test"] # Overwrite starting command when this test container is created
+    environment:
+      - CI=false
+      - CHOKIDAR_USEPOLLING=true

@@ -1,0 +1,10 @@
+FROM node:25-alpine3.22
+
+WORKDIR '/usr/app'
+COPY package.json ./
+RUN npm install
+
+COPY ./ ./
+
+# like 'npm run start' command in terminal line
+CMD ["npm", "run", "start"] 
