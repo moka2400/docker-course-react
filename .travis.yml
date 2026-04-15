@@ -1,0 +1,11 @@
+sudo: required # Super user permissions required when using Travis
+
+services:
+  - docker # Now, Travis CI is going to automatically install a caopy of Docker into our container. Sort of. We just tell it that it needs a copy of Docker in order to go
+
+before-install:
+  - docker build -t moka2400/docker-course-react -f Dockerfile.dev . # Build with Dockerfile.dev, because we want to run the test suite eventually. Note that you can use any tag you want, but it is good convention to use the actual name of your repo
+
+# All the scripts that needs to be executed when we want to run our tests
+script:
+  - docker run -e CI=true moka2400/docker-course-react npm run test
