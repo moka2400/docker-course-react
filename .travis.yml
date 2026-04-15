@@ -11,14 +11,14 @@ script:
   - docker run -e CI=true moka2400/docker-course-react npm run test
 
 # For AWS deployment
-deploy:
-  provider: elasticbeanstalk
-  region: "eu-north-1"
-  app: "frontend"
-  env: "Frontend-env"
-  bucket_name: "elasticbeanstalk-eu-north-1-868072837228"
-  bucket_path: "frontend"
-  on:
-    branch: master # Only on branch master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: "$AWS_SECRET_KEY"
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "eu-north-1"
+#   app: "frontend"
+#   env: "Frontend-env"
+#   bucket_name: "elasticbeanstalk-eu-north-1-868072837228"
+#   bucket_path: "frontend"
+#   on:
+#     branch: master # Only on branch master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: "$AWS_SECRET_KEY"
